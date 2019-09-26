@@ -1,0 +1,4 @@
+server
+*.iml
+.idea
+server/spigot.jar

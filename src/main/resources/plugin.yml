@@ -1,0 +1,20 @@
+name: ${plugin}
+version: ${project.version}
+main: ${package}
+author: "Felux"
+website: https://felux.io/
+description: "Fetch placeholders from PlaceholderAPI across servers."
+softdepend: ["PlaceholderAPI"]
+
+commands:
+  globalholders:
+    description: ${plugin} commands
+    usage: ""
+    aliases: ["gholders", "gh"]
+
+permissions:
+  globalholders.set:
+    description: Set a players balance.
+  globalholders.balance:
+    description: View balance.
+    default: true
