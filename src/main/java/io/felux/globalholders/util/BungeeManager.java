@@ -115,7 +115,7 @@ public class BungeeManager implements PluginMessageListener, Listener {
             if (subChannel.equalsIgnoreCase("RequestPlaceholder")) {
                 String placeholderFormatted = "%" + somedata + "%";
                 String placeholderResult = PlaceholderAPI.setPlaceholders(player, "%" + somedata + "%");
-                globalholders.getLogger().info("[" + subChannel + "] Placeholder '" + placeholderFormatted + "' requested from " + player.getName() + ", result is '" + placeholderResult + "'.");
+//                globalholders.getLogger().info("[" + subChannel + "] Placeholder '" + placeholderFormatted + "' requested from " + player.getName() + ", result is '" + placeholderResult + "'.");
 
                 String dataResult = player.getUniqueId() + ";" + serverId + ";" + somedata + ";" + placeholderResult;
                 requestPlaceholder(player, serverId, "ReceivePlaceholder", dataResult);
@@ -123,8 +123,8 @@ public class BungeeManager implements PluginMessageListener, Listener {
 
             if (subChannel.equalsIgnoreCase("ReceivePlaceholder")) {
                 String[] resultData = somedata.split(";", 4);
-                globalholders.getLogger().info("[" + subChannel + "] Placeholder '%" + resultData[2] + "%' received from server " + resultData[1] + " with result: '" + resultData[3] + "'.");
-                globalholders.getLogger().info(" ");
+//                globalholders.getLogger().info("[" + subChannel + "] Placeholder '%" + resultData[2] + "%' received from server " + resultData[1] + " with result: '" + resultData[3] + "'.");
+//                globalholders.getLogger().info(" ");
 
                 UUID playerUuid = UUID.fromString(resultData[0]);
                 String serverId = resultData[1];

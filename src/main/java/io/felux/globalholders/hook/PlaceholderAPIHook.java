@@ -87,8 +87,8 @@ public class PlaceholderAPIHook extends PlaceholderExpansion {
 
         String serverIdRaw = RegexUtil.extract(serverId, "([a-zA-Z_]+)");
 
-        plugin.getLogger().info("[SERVER] " + serverIdRaw);
-        plugin.getLogger().info("[PLACEHOLDER] " + placeholder);
+//        plugin.getLogger().info("[SERVER] " + serverIdRaw);
+//        plugin.getLogger().info("[PLACEHOLDER] " + placeholder);
 
 
         if (Bukkit.getPlayer(player.getUniqueId()) != null)
