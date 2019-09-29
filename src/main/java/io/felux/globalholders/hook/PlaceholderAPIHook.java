@@ -1,7 +1,10 @@
 package io.felux.globalholders.hook;
 
 import io.felux.globalholders.Globalholders;
+import io.felux.globalholders.api.PlayerCache;
+import io.felux.globalholders.util.RegexUtil;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
+import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 
 public class PlaceholderAPIHook extends PlaceholderExpansion {
@@ -74,12 +77,31 @@ public class PlaceholderAPIHook extends PlaceholderExpansion {
 
 
     public String onRequest(final OfflinePlayer player, final String identifier) {
+        System.out.println("identifier = " + identifier);
 
-        String[] data = identifier.split("_", 2);
+        String serverId = RegexUtil.extract(identifier, "\\(.*?\\)");
 
-        plugin.getLogger().info(identifier);
-        plugin.getLogger().info("[SERVER] " + data[0]);
-        plugin.getLogger().info("[PLACEHOLDER] " + data[1]);
-        return null;
+        if (serverId == null) return "Unknown Server";
+
+        String placeholder = identifier.replace(serverId + "_", "");
+
+        String serverIdRaw = RegexUtil.extract(serverId, "([a-zA-Z_]+)");
+
+        plugin.getLogger().info("[SERVER] " + serverIdRaw);
+        plugin.getLogger().info("[PLACEHOLDER] " + placeholder);
+
+
+        if (Bukkit.getPlayer(player.getUniqueId()) != null)
+            plugin.getBungeeManager().requestPlaceholder(Bukkit.getPlayer(player.getUniqueId()), serverIdRaw, "RequestPlaceholder", placeholder);
+
+        String placeholderResponse = PlayerCache.getPlayer(player.getUniqueId()).getPlaceholderFromCache(serverIdRaw, "%" + placeholder + "%");
+
+        if(placeholderResponse == null) return "Unknown Placeholder";
+
+        if (!placeholderResponse.isEmpty()) {
+            return placeholderResponse;
+        }
+
+        return " ";
     }
 }

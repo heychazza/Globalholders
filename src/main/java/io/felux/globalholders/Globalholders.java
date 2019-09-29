@@ -19,9 +19,15 @@ public class Globalholders extends JavaPlugin {
 //        return shopManager;
 //    }
 
+    private BungeeManager bungeeManager;
+
+    public BungeeManager getBungeeManager() {
+        return bungeeManager;
+    }
+
     @Override
     public void onEnable() {
-        new BungeeManager(this);
+        this.bungeeManager = new BungeeManager(this);
         hookPlaceholderAPI();
     }
 
